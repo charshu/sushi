@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="application">
+<meta charset="utf-8" />
+
+<head>
+  <style>
+    .select {
+      display: block;
+      color: red;
+      background-color: #EAEAEA;
+    }
+  </style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Bootstrap theme -->
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="font/stylesheet.css">
+</head>
+
+<body>
+  <header style="text-align:center;">
+    <h1>{{ "Tanakasan's" }} Sushi Store</h1>
+    <h2>Open since {{ 10*200 }}</h2>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="list-group" ng-controller="storeController as store">
+          <div class="list-group-item clearfix" ng-repeat="each_sushi in sushi ">
+            <div ng-class="{'select': purchase(each_sushi)}">
+
+              <img ng-src=" {{each_sushi.image}} " />
+              <h1>{{each_sushi.name}}</h1>
+              <h1>{{each_sushi.price | currency:'¥'}} </h1>
+              <p>
+                {{each_sushi.description}}
+              </p>
+              <p>
+                MFG : {{each_sushi.mfg | date :'medium'}}
+              </p>
+
+              <div ng-show="each_sushi.canPurchase">
+                <p>
+                  {{each_sushi.quantity}}
+                </p>
+                <button class="btn btn-default">
+                  สั่งซื้อ
+                </button>
+                <button class="btn btn-default" ng-click="clickAdd(each_sushi)">UP</button>
+                <button class="btn btn-default" ng-click="cliclRemove(each_sushi)">DOWN</button>
+              </div>
+              <div ng-hide="each_sushi.canPurchase">
+                <h2 style="font-family:'kaushan_scriptregular',sans-serif;color:red;">Out of stock</h2>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="col-md-6">
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JavaScript -->
+  <script src="js/lib/bootstrap.min.js"></script>
+  <!--AngularJS Javascript -->
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
